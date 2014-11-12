@@ -1,0 +1,64 @@
+<html>
+<head>
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script>
+
+function getNext()
+{
+var x1=parseInt($("#x1").val());
+var x2=parseInt($("#x2").val());
+var y1=parseInt($("#y1").val());
+var y2=parseInt($("#y2").val());
+var a=parseInt($("#a").val());
+var b=parseInt($("#b").val());
+var p=parseInt($("#p").val());
+var lamda, x3, y3;
+$("#output").empty();
+if(x1==x2 && y1==-y2)
+	{
+	$("#output").append("0 at infinity");
+	}
+else
+	{
+	if(x1==x2 && y1==y2)
+		{
+		lamda=Math.round((3*x1*x1 +a)/(2*y1));
+		
+		}
+	else
+		{
+		lamda=Math.round((y2-y1)/(x2-x1));
+		}
+		
+	x3=getMod(((lamda*lamda)-x1-x2),p);
+	y3=getMod((lamda*(x1-x3)-y1),p);
+	$("#output").append("Z(x3,y3)=("+x3+","+y3+")");
+	}
+}
+function getMod(t, n)
+{
+var ans= t % n;
+if (ans>=0)
+	{
+	return(ans);
+	}
+else
+	{
+	ans=n+ans;
+	return(ans);
+	}
+}
+
+</script>
+</head>
+<body>
+
+<br/> a=<input type="number" id="a"/> 
+<br/>b=<input type="number" id="b"/>
+<br/>p=<input type="number" id="p"/>
+<br/>P(x1,y1)=<input type="number" id="x1"/><input type="number" id="y1"/>
+<br/>Q(x2,y2)=<input type="number" id="x2"/><input type="number" id="y2"/>
+<input type="submit" onclick="getNext()"/>
+<br/><b>Output:</b><br><div id="output"></div>
+</body>
+</html>
